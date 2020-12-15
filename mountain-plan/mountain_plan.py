@@ -25,7 +25,7 @@ class mountain_gather(object):
     def _generic_data_retrieval(self, forecast_table, value_id, span_id):
         overall = forecast_table.find(name='tr', attrs={'class':value_id})
         tags = overall.find_all(name="span", attrs={'class':span_id})
-        vals = [i.text.strip('\n -') for i in tags]
+        vals = [int(i.text.strip('\n -').replace('','0')) for i in tags]
         return vals
 
     @staticmethod
@@ -90,6 +90,7 @@ class mountain_gather(object):
     def _cleanup(self):
         self.mountain_frame[['wind_value','wind_direction']] = self.mountain_frame.period_wind.apply( 
                                                 lambda x: pd.Series(str(x).split(" ")))
+        self.mountain_frame['wind_value'] = self.mountain_frame['wind_value'].astype(int)
 #         self.mountain_frame[['dow','day']] = self.mountain_frame.days.apply( 
 #                                                 lambda x: pd.Series(str(x).split("_")))
         
