@@ -22,10 +22,22 @@ class mountain_gather(object):
         forecast_link = forecast_tag.attrs['href']
         return forecast_link
 
+    @staticmethod
+    def _metric_typer(met):
+        if met=='':
+            return 0
+        elif met=='-':
+            return 0
+        else:
+            try:
+                return int(met)
+            except:
+                return met
+
     def _generic_data_retrieval(self, forecast_table, value_id, span_id):
         overall = forecast_table.find(name='tr', attrs={'class':value_id})
         tags = overall.find_all(name="span", attrs={'class':span_id})
-        vals = [int(i.text.strip('\n -').replace('','0')) for i in tags]
+        vals = [self._metric_typer(i.text.strip('\n ')) for i in tags]
         return vals
 
     @staticmethod
