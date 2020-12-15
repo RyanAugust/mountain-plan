@@ -1,4 +1,4 @@
-# mountain-alert
+# mountain-plan
 Aggregate statistics about the current conditions on various mountains
 
 ## To Do
