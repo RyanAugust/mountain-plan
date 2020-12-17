@@ -78,7 +78,7 @@ class mountain_gather(object):
         self.payload['day_periods'] = day_periods
         
         expanded_days = self._expand_days(days, day_periods)
-        self.payload['days'] = expanded_days
+        self.payload['date'] = expanded_days
         
         if ret:
             return (expanded_days, day_periods)
